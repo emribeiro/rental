@@ -5,15 +5,24 @@ import { CategoriesRepository } from '../repository/categoriesRepository';
 
 
 const categoriesRouter = Router()
-const categoryRepository = new CategoriesRepository();
+const categoriesRepository = new CategoriesRepository();
 
 
 categoriesRouter.post("/", (request, response) => {
     const { name, description } = request.body;
 
-    const category = categoryRepository.create({name, description});
+    if(categoriesRepository.findByName(name)){
+        return response.status(400).send({error: "Category Already Exists"});
+    }
+    const category = categoriesRepository.create({name, description});
 
     return response.status(201).send(category);
+});
+
+categoriesRouter.get("/", (request, response) => {
+    const all = categoriesRepository.list();
+
+    return response.status(200).send(all);
 });
 
 export {categoriesRouter};
