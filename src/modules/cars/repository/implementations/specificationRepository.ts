@@ -4,9 +4,19 @@ import {ISpecificationDTO, ISpecificationRepository} from "../ISpecificationRepo
 class SpecificationRepository implements ISpecificationRepository{
     private specifications;
 
-    constructor(){
+    private static INSTANCE;
+
+    private constructor(){
         this.specifications = [];
-    }    
+    }
+    
+    public static getInstance(){
+        if(!SpecificationRepository.INSTANCE){
+            SpecificationRepository.INSTANCE = new SpecificationRepository();
+        }
+
+        return SpecificationRepository.INSTANCE;
+    }
     
     list() {
         return this.specifications;
