@@ -1,7 +1,7 @@
 import { Router } from 'express';
-import { Category } from '../model/category';
-import { CategoriesRepository } from '../repository/categoriesRepository';
-import { CreateCategoryService } from '../services/createCategoryService';
+import { Category } from '../modules/model/category';
+import { CategoriesRepository } from '../modules/repository/categoriesRepository';
+import { CreateCategoryService } from '../modules/services/createCategoryService';
 
 
 
