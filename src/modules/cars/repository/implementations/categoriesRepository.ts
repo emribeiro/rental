@@ -1,6 +1,5 @@
-import { response } from "express";
-import { Category } from "../model/category";
-import { ICategoriesRepository, ICategoryDTO } from "./ICategoriesRepository";
+import { Category } from "../../model/category";
+import { ICategoriesRepository, ICategoryDTO } from "../ICategoriesRepository";
 
 class CategoriesRepository implements ICategoriesRepository{
 
