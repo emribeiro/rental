@@ -1,10 +1,12 @@
-FROM node
+FROM node:latest
 
 WORKDIR /usr/app
 
 COPY package.json ./
 
-RUN npm install
+RUN npm install -g npm@7.7.1
+
+RUN npm install --also=dev
 
 COPY . . 
 

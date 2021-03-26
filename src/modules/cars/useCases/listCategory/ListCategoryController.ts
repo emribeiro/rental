@@ -7,7 +7,6 @@ class ListCategoryController{
     constructor (private listCategoryUseCase : ListCategoryUseCase){}
 
     handle(request: Request, response: Response): Response {
-        console.log("reload Funcionando");
         const categories = this.listCategoryUseCase.execute();
 
         return response.status(200).json(categories);
