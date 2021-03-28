@@ -26,6 +26,8 @@ services:
       - database
     depends_on: 
       - database
+    volumes:
+      - .:/usr/app
 
 volumes: 
   pgdata: 
