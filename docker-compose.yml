@@ -6,14 +6,14 @@ services:
     container_name: database_rental
     restart: always
     ports:
-      - 5432:5432
+      - 3434:5432
     environment: 
       - POSTGRES_USER=docker
       - POSTGRES_PASSWORD=ignite
       - POSTGRES_DB=rental
     volumes:
       - pgdata:/data/postgres
-    network_mode: bridge
+      
   app:
     build: .
     container_name: rental
