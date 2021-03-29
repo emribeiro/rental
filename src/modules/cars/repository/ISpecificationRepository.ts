@@ -7,9 +7,9 @@ interface ISpecificationDTO{
 }
 
 interface ISpecificationRepository{
-    list(): Specification [];
-    findByName(name: string) : Specification;
-    create({ name, description} : ISpecificationDTO) : Specification ;
+    list(): Promise<Specification[]>;
+    findByName(name: string) : Promise<Specification>;
+    create({ name, description} : ISpecificationDTO) : Promise<Specification> ;
 }
 
 
