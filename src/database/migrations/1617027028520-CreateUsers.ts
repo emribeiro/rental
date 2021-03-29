@@ -34,7 +34,8 @@ export class CreateUsers1617027028520 implements MigrationInterface {
                 },
                 {
                     name: "admin",
-                    type: "boolean"
+                    type: "boolean",
+                    default: false
                 },
                 {
                     name: "created_at",
