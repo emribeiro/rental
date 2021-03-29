@@ -11,10 +11,9 @@ class CreateUserUseCase{
         private userRepository : IUserRepository
     ){};
 
-    async execute({name, username, password, email, driver_license}: ICreateUserDTO): Promise<User>{
+    async execute({name, password, email, driver_license}: ICreateUserDTO): Promise<User>{
         const user = await this.userRepository
                                 .create({ name,
-                                          username,
                                           password, 
                                           email, 
                                           driver_license}); 
