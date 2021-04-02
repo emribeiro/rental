@@ -1,4 +1,4 @@
-import { Category } from "../../model/category";
+import { Category } from "../../infra/typeorm/model/category";
 import { ICategoriesRepository, ICategoryDTO } from "../ICategoriesRepository";
 
 
