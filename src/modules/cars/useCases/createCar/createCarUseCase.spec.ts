@@ -17,7 +17,7 @@ describe("Create car", () => {
     });
 
     it("Should be able to create a new car", async () => {
-        await createCarUseCase.execute({
+        const createdCar = await createCarUseCase.execute({
             name: "Car test name", 
             description: "Car test description",
             daily_rate: 100, 
@@ -27,7 +27,6 @@ describe("Create car", () => {
             category_id: "category"
         });
 
-        const createdCar = await carsRepository.findByLicensePlate("ABC-1234");
 
         expect(createdCar).toHaveProperty("id");
     });
@@ -57,7 +56,7 @@ describe("Create car", () => {
     });
 
     it("Should be able to create a car with availability true by default ", async () => {
-            await createCarUseCase.execute({
+            const createdCar = await createCarUseCase.execute({
                 name: "Car test name 1", 
                 description: "Car test description",
                 daily_rate: 100, 
@@ -66,8 +65,6 @@ describe("Create car", () => {
                 brand: "Test brand", 
                 category_id: "category"
             });
-
-            const createdCar = await carsRepository.findByLicensePlate("ABC-1234");
 
             expect(createdCar.avaliable).toBe(true);
 

@@ -19,7 +19,7 @@ class CreateCarController{
 
         const createCarUseCase = container.resolve(CreateCarUseCase);
 
-        await createCarUseCase.execute({
+        const createdCar = await createCarUseCase.execute({
             name, 
             description,
             daily_rate, 
@@ -29,7 +29,7 @@ class CreateCarController{
             category_id
         });
 
-        return response.status(201).send();
+        return response.status(201).send(createdCar);
         
     }
 }
