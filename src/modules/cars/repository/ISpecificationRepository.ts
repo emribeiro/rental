@@ -10,6 +10,7 @@ interface ISpecificationRepository{
     list(): Promise<Specification[]>;
     findByName(name: string) : Promise<Specification>;
     create({ name, description} : ISpecificationDTO) : Promise<Specification> ;
+    findByIds(ids: string[]): Promise<Specification[]>;
 }
 
 

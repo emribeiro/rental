@@ -8,6 +8,7 @@ class SpecificationRepository implements ISpecificationRepository{
     constructor(){
         this.repository = getRepository(Specification);
     }
+
     
     async list() : Promise<Specification[]> {
         const specifications = await this.repository.find();
@@ -26,6 +27,12 @@ class SpecificationRepository implements ISpecificationRepository{
         await this.repository.save(specification);
 
         return specification;
+    }
+
+    async findByIds(ids: string[]): Promise<Specification[]> {
+        const specifications = await this.repository.findByIds(ids);
+
+        return specifications;
     }
 
 }
