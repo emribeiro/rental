@@ -11,6 +11,7 @@ class CarRepositoryInMemory implements ICarsRepository{
     constructor(){
         this.cars = [];
     }
+    
 
     async create({ name
            , description
@@ -42,6 +43,27 @@ class CarRepositoryInMemory implements ICarsRepository{
         return car;
     }
 
+    async findAvaliable(brand ?: string, category_id ?: string, name ?: string): Promise<Car[]>{
+        const avaliableCars = this.cars.filter(car => {
+            if(
+                car.avaliable === true && 
+                ( (brand && car.brand === brand) ||
+                  (category_id && car.category_id === category_id) ||
+                  (name && car.name === name)
+                )
+            ){
+                return car;
+            }else{
+                if(car.avaliable === true && (!brand && !category_id && !name)){
+                    return car;
+                }else{
+                    return null;
+                }
+            }
+        })
+
+        return avaliableCars;
+    }
 }
 
 export { CarRepositoryInMemory }
