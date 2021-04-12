@@ -5,11 +5,13 @@ import { router } from './shared/infra/http/routes';
 import  swaggerUi from 'swagger-ui-express';
 import swaggerFile from "./swagger.json";
 
-import "./database"
+import createConnection from "./database"
 
 import "./shared/container"
 import instance from "tsyringe/dist/typings/dependency-container";
 import { AppError } from "./errors/AppError";
+
+createConnection();
 
 const app = express();
 
