@@ -1,5 +1,6 @@
 
 
+import { inject, injectable } from "tsyringe";
 import { AppError } from "../../../../errors/AppError";
 import { IDateProvider } from "../../../../shared/container/providers/dateProvider/IDateProvider";
 import { Rental } from "../../infra/typeorm/model/rental";
@@ -13,22 +14,28 @@ interface IRequest{
     expected_return_date: Date;
 }
 
+@injectable()
 class CreateRentalsUseCase{
 
     constructor(
+        @inject("RentalsRepository")
         private rentalsRepository: IRentalsRepository,
+        @inject("DayjsDateProvider")
         private dateProvider: IDateProvider
     ){}
 
     async execute({car_id, user_id, expected_return_date} : IRequest): Promise<Rental>{
 
+
         const MINIMAL_RENT_HOURS = 24;
 
         const activeCarRental = await this.rentalsRepository.findActiveRentalByCar(car_id);
 
+
         if(activeCarRental){
             throw new AppError("Car already have active Rental");
         }
+
 
         const activeUserRental = await this.rentalsRepository.findActiveRentalByUser(user_id);
 
@@ -36,7 +43,7 @@ class CreateRentalsUseCase{
             throw new AppError("User already have a active Rental");      
         }
 
-        
+
         const compare = this.dateProvider.compareInHours(this.dateProvider.now(), expected_return_date);
 
         if(compare < MINIMAL_RENT_HOURS){
