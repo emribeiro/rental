@@ -29,7 +29,7 @@ describe("Create category Controle", () => {
         await connection.close();
     });
 
-    it("Should be able to create a new category", async () => {
+    it("Should be able to list all Categories", async () => {
 
         const responseToken = await request(app).post("/sessions").send({
             email: "admin@admin.com",
@@ -38,41 +38,18 @@ describe("Create category Controle", () => {
 
         const { token } = responseToken.body;
 
-        const response = await request(app).post("/categories").send({
+        await request(app).post("/categories").send({
             name: "Category SuperTest",
             description: "Category SuperTest Description."
         }).set({
             Authorization: `Bearer ${token}`
         });
 
-        expect(response.status).toBe(201);
+        const response = await request(app).get("/categories");
+
+        expect(response.status).toBe(200);
+        expect(response.body.length).toBe(1);
 
     });
 
-    it("should not be able to create a category with name exists", async () => {
-
-        const responseToken = await request(app).post("/sessions").send({
-            email: "admin@admin.com",
-            password: "admin"
-        });
-
-        const { token } = responseToken.body;
-
-        const response = await request(app).post("/categories").send({
-            name: "Category SuperTest",
-            description: "Category SuperTest Description."
-        }).set({
-            Authorization: `Bearer ${token}`
-        });
-
-        const response2 = await request(app).post("/categories").send({
-            name: "Category SuperTest",
-            description: "Category SuperTest Description."
-        }).set({
-            Authorization: `Bearer ${token}`
-        });
-
-        expect(response2.status).toBe(400);
-
-    });
 });
