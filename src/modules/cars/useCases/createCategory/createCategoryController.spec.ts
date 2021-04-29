@@ -7,7 +7,7 @@ import { hash } from "bcryptjs";
 
 let connection : Connection;
 
-describe("Create category Controle", () => {
+describe("Create category Controller", () => {
 
     beforeAll(async () => {
         connection = await createConnection();

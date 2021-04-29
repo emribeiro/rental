@@ -11,6 +11,7 @@ class CarsRepository implements ICarsRepository{
     constructor(){
         this.repository = getRepository(Car);
     }
+    
     async findById(id: string): Promise<Car> {
 
         const car = await this.repository.findOne(id);
@@ -20,7 +21,7 @@ class CarsRepository implements ICarsRepository{
     
     async findAvaliable(brand?: string, category_id?: string, name?: string): Promise<Car[]> {
         const carsQuery = await this.repository
-                .createQueryBuilder("c")
+                .createQueryBuilder("cars")
                 .where("avaliable = :avaliable", {avaliable : true});
 
         if(brand){
@@ -73,6 +74,14 @@ class CarsRepository implements ICarsRepository{
         return car;
     }
 
+    async updateAvaliable(id: string, avaliable: boolean): Promise<void> {
+        await this.repository
+                  .createQueryBuilder()
+                  .update(Car)
+                  .set({avaliable: avaliable})
+                  .where("id = :id", {id: id})
+                  .execute();
+    }
 }
 
 export { CarsRepository}
