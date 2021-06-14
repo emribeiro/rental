@@ -1,9 +1,11 @@
+import { throws } from "node:assert";
 import { ICreateRentalDTO } from "../../dtos/ICreateRentalDTO";
 import { Rental } from "../../infra/typeorm/model/rental";
 import { IRentalsRepository } from "../IRentalsRepository";
 
 
 class RentalsRepositoryInMemory implements IRentalsRepository{
+    
 
     rentals: Rental[]  = [];
 
@@ -34,7 +36,9 @@ class RentalsRepositoryInMemory implements IRentalsRepository{
         return this.rentals.find(rental => rental.id === id);
     }
 
-    
+    async findByUser(user_id: string): Promise<Rental[]> {
+        return this.rentals.filter(rental => rental.user_id === user_id);
+    }
 }
 
 export { RentalsRepositoryInMemory }

@@ -25,7 +25,7 @@ describe("Create Car Specification", () => {
             const car_id = "1234"
             const specifications_id = ["54321"];
 
-            createCarSpecificationUseCase.execute({car_id, specifications_id});
+            await createCarSpecificationUseCase.execute({car_id, specifications_id});
 
         }).rejects.toBeInstanceOf(AppError);
     })
