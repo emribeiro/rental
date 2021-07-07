@@ -18,4 +18,4 @@ rentalRoutes.get("/", ensureAuthenticated, listUserRentalsController.handle);
 
 export {
     rentalRoutes
-}
+} 
