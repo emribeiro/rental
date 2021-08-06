@@ -48,4 +48,4 @@ jobs:
           cd app/rental/
           yarn
           ./node_modules/.bin/typeorm migration:run
-          pm2 restart
+          pm2 restart server
