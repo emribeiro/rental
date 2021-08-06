@@ -45,7 +45,7 @@ jobs:
          port: ${{ secrets.SSH_PORT }}
          key: ${{ secrets.SSH_KEY }}
          script: |
-          cd /app/rental/
+          cd app/rental/
           yarn
           ./node_modules/.bin/typeorm migration:run
           cp swagger.json /dist/swagger.json
