@@ -15,6 +15,10 @@ services:
       - pgdata:/data/postgres
     command: -p 3434
       
+  redis:
+    image: redis:alpine
+    ports:
+      - 6379:6379
   app:
     build: .
     container_name: rental
